@@ -1,8 +1,11 @@
 require 'rspec/expectations'
 require 'capybara/cucumber'
 require 'capybara/poltergeist'
+require 'action_view'
+include ActionView::Helpers::NumberHelper
 
-if ENV['IN_BROWSER']
+
+if !ENV['IN_BROWSER']
   # On demand: non-headless tests via Selenium/WebDriver
   # To run the scenarios in browser (default: Firefox), use the following command line:
   # RUN_IN_BROWSER=true bundle exec cucumber
@@ -19,7 +22,7 @@ else
     Capybara::Poltergeist::Driver.new(
       app,
       window_size: [1280, 1024],
-      #debug:       true,#
+      debug:       true,
 	  timeout: 30
     )
   end
@@ -31,11 +34,8 @@ Capybara.default_selector = :css
 World(RSpec::Matchers)
 
 # configure the base urls for frontend and backend here
-$sys_url = 'https://ebiz-stage.merckgroup.com/INTERSHOP/web/WFS/Merck-US-Site/en_US/-/USD/'
+$sys_url = 'http://ebiz-systest.merckgroup.com/INTERSHOP/web/WFS/Merck-US-Site/en_US/-/USD/'
 
 def ui_url(path)
   $sys_url + path
 end
-
-# file with database fixtures
-$fixtures = 'features/support/fixtures.json'
