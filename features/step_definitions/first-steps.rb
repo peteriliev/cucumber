@@ -20,16 +20,8 @@ When(/^I search for "(.*?)"$/) do |term|
 	find(:xpath, "//button[@title=\"Search\"]").click
 end
 
-Then(/^I get (\d+) products$/) do |count|
-	page.should have_content 'Products (' + number_with_delimiter(count) + ')'
-end	
-
-Then(/^I get (\d+) documents$/) do |count|
-	page.should have_content 'Documents (' + number_with_delimiter(count) + ')'
-end	
-
-Then(/^I get (\d+) pages$/) do |count|
-	page.should have_content 'Pages (' + number_with_delimiter(count) + ')'
+Then(/^I get (\d+) ([^ ]*) as a search result$/) do |count, type|
+	page.should have_content type + ' (' + number_with_delimiter(count) + ')'
 end	
 
 When(/^I navigate to Quick Purchase$/) do

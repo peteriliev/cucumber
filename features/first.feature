@@ -4,9 +4,9 @@ Feature: Sanity check
   Scenario: Search for "antibodies"
 	Given I navigate to the US channel Home Page
     When I search for "antibodies"
-    Then I get 9984 products
-	And I get 6118 documents
-	And I get 160 pages
+    Then I get 9984 Products as a search result
+	And I get 6118 Documents as a search result
+	And I get 160 Pages as a search result
  
   Scenario: Add 2 Merck, 2 Milli / 2 PoR, 2 'normal' product to cart
 	Given I have navigated to the US channel
